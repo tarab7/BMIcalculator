@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>BMI CALCULATOR</title>
+    <link rel="stylesheet" href="style.css">
+    <script language="Javascript">
+        function calculate()
+        {
+            //document.write("hello");
+            var x= document.getElementById("selectWeightUnit");
+            var i = x.selectedIndex;           
+            var wt=Number(document.getElementById('weight').value);
+            if(i==1)
+            {
+                wt=wt*0.45359237;
+            }
+            
+            var y= document.getElementById("selectHeightUnit");
+            var j=y.selectedIndex;
+            if(j==1)
+            {
+                var htft=Number(document.getElementById('heightft').value);
+                var htin=Number(document.getElementById('heightin').value);
+                var ht=(htft/3.28)+(htin*0.0254);
+            }
+            else
+            {
+                var htcm=Number(document.getElementById('heightcm').value);
+                var ht=htcm/100;
+            }
+            var bmi=wt/(ht * ht);
+            var bmi = parseFloat(bmi).toFixed( 3 );
+            document.getElementById('result').innerHTML=bmi;
+            var status;
+            if(bmi<=18.5)
+            {
+                status="Underweight";
+            }
+            else if(bmi<=24.9)
+            {
+                status="Normal/Healthy Weight";
+            }
+            else if(bmi<=29.9)
+            {
+                status="Overweight";
+            }
+            else{
+                status="Obese";
+            }
+            document.getElementById('status').innerText=status;
+
+        }
+    </script>
+</head>
+<body>
+    <div class="heading">BMI CALCULATOR</div>
+        <form name="myform" method="post">
+            Weight: <input type="text" id="weight">  
+            <select id="selectWeightUnit">
+                <option>kg</option>
+                <option>lbs</option>
+            </select><br><br>
+            Height: <select id="selectHeightUnit">
+                <option>cm</option>
+                <option>Ft In</option>
+            </select><br>
+            <center>
+            <input type="text" id="heightcm">cm<br>
+            OR<br>
+            <input type="text" id="heightft">ft<input type="text" id="heightin">in<br>
+            <br><br><input type="button" class="calculate" onclick="calculate();" value="Calculate"><br>
+        </center>
+        <br>BMI: <span id="result"></span>
+        <br>STATUS: <span id="status"></span>
+    
+        </form>
+      
+</body>
+</html>
